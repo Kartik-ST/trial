@@ -18,7 +18,7 @@ body {
 #game {
   position: relative;
   display: inline-grid;
-  background: black;
+  background: url(./images/pacman-background.png) no-repeat;
 }
 
 .game-status {
@@ -63,18 +63,20 @@ body {
   display: block;
 }
 
-.blank {
+/* .blank {
   background: black;
-}
+} */
 
-.wall {
+/* .wall {
   border: 1px solid blue;
-}
+} */
 
 .dot {
-  background: white;
-  border: 8px solid black;
-  border-radius: 50%;
+  background: url(./images/garbage-bin-dot.png) no-repeat;
+  background-position: 8px 6px;
+  background-size: 70%;
+  /* border: 8px solid black;
+  border-radius: 50%; */
 }
 
 .pill {
@@ -89,7 +91,7 @@ body {
   border: none;
 }
 
-.ghost::before {
+/* .ghost::before {
   content: '';
   display: block;
   position: absolute;
@@ -113,32 +115,32 @@ body {
   right: 3px;
   top: 5px;
   border: 2px solid white;
-}
+} */
 
 .scared {
   background: blue !important;
 }
 
 .blinky {
-  background: red;
+  background: url(./images/vehicle-lorry.png) no-repeat;
 }
 
 .pinky {
-  background: pink;
+  background: url(./images/vehicle-lorry.png) no-repeat;
 }
 
 .inky {
-  background: cyan;
+  background: url(./images/vehicle-police-car.png) no-repeat;
 }
 
 .clyde {
-  background: orange;
+  background: url(./images/vehicle-taxi.png) no-repeat;
 }
 
 .pacman {
-  background: yellow;
-  border: none;
-  border-radius: 50%;
+  background: url(./images/pacman.png) no-repeat;
+ /* border: none;images
+   border-radius: 50%;
   clip-path: polygon(
     0 0,
     20px 0,
@@ -148,10 +150,10 @@ body {
     20px 20px,
     0 20px
   );
-  animation: chew 0.2s linear forwards infinite;
+  animation: chew 0.2s linear forwards infinite; */
 }
 
-@keyframes chew {
+/* @keyframes chew {
   50% {
     clip-path: polygon(
       0 0,
@@ -163,4 +165,4 @@ body {
       0 20px
     );
   }
-}
+} */
