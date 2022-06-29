@@ -1,4 +1,4 @@
-import { GRID_SIZE, CELL_SIZE, OBJECT_TYPE, CLASS_LIST } from './setup';
+import { GRID_SIZE, CELL_SIZE, OBJECT_TYPE, CLASS_LIST, DIFFICULTY_LEVEL } from './setup';
 
 class GameBoard {
   constructor(DOMGrid) {
@@ -15,14 +15,39 @@ class GameBoard {
     this.DOMGrid.appendChild(div);
   }
 
-  createGrid(level) {
+  createGrid(level, difficultyLevel) {
     this.dotCount = 0;
     this.grid = [];
     this.DOMGrid.innerHTML = '';
     // First set correct amount of columns based on Grid Size and Cell Size
     this.DOMGrid.style.cssText = `grid-template-columns: repeat(${GRID_SIZE}, ${CELL_SIZE}px);`;
 
+    const indexOfDot = CLASS_LIST.indexOf(OBJECT_TYPE.DOT);
+    const indexOfBlank = CLASS_LIST.indexOf(OBJECT_TYPE.BLANK);
+
+    let originalDotCount = 0;
     level.forEach((square) => {
+      if (square === indexOfDot) {
+        if (!difficultyLevel) {
+          square = indexOfBlank
+        } else {
+          switch (difficultyLevel) {
+            case DIFFICULTY_LEVEL.LEVEL_ONE:
+              if (originalDotCount % 3 !== 0)
+                square = indexOfBlank
+              break;
+            case DIFFICULTY_LEVEL.LEVEL_TWO:
+              if (originalDotCount % 2 !== 0)
+                square = indexOfBlank
+              break;
+            case DIFFICULTY_LEVEL.LEVEL_THREE:
+              square = indexOfDot
+              break;
+          }
+          originalDotCount++;
+        }
+      }
+
       const div = document.createElement('div');
       div.classList.add('square', CLASS_LIST[square]);
       div.style.cssText = `width: ${CELL_SIZE}px; height: ${CELL_SIZE}px;`;

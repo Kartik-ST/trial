@@ -14,9 +14,12 @@ import soundGhost from './sounds/eat_ghost.wav';
 const gameGrid = document.querySelector('#game');
 const scoreTable = document.querySelector('#score');
 const startButton = document.querySelector('#start-button');
+const levelSelect = document.querySelector('#level-select');
+const timerDisplay = document.querySelector('#game-timer');
+
 // Game constants
 const POWER_PILL_TIME = 10000; // ms
-const GLOBAL_SPEED = 80; // ms
+const GLOBAL_SPEED = 140; // ms
 const gameBoard = GameBoard.createGameBoard(gameGrid, LEVEL);
 // Initial setup
 let score = 0;
@@ -24,6 +27,8 @@ let timer = null;
 let gameWin = false;
 let powerPillActive = false;
 let powerPillTimer = null;
+let gameTime = 0;
+let gameTimer;
 
 // --- AUDIO --- //
 function playAudio(audio) {
@@ -33,6 +38,7 @@ function playAudio(audio) {
 
 // --- GAME CONTROLLER --- //
 function gameOver(pacman, grid) {
+  clearInterval(gameTimer);
   playAudio(soundGameOver);
 
   document.removeEventListener('keydown', (e) =>
@@ -113,18 +119,23 @@ function gameLoop(pacman, ghosts) {
   }
   // 9. Show new score
   scoreTable.innerHTML = score;
+
+  //10. Display time elapsed
+  timerDisplay.innerHTML = `${Math.floor(gameTime/60).toString().padStart(2,'0')}: ${(gameTime%60).toString().padStart(2,'0')}`;
 }
 
-function startGame() {
+function startGame(difficultyLevel) {
+
+  gameTimer = setInterval(() => gameTime++, 1000);
   playAudio(soundGameStart);
 
   gameWin = false;
   powerPillActive = false;
   score = 0;
 
-  startButton.classList.add('hide');
+  levelSelect.classList.add('hide');
 
-  gameBoard.createGrid(LEVEL);
+  gameBoard.createGrid(LEVEL, difficultyLevel);
 
   const pacman = new Pacman(2, 287);
   gameBoard.addObject(287, [OBJECT_TYPE.PACMAN]);
@@ -132,16 +143,26 @@ function startGame() {
     pacman.handleKeyInput(e, gameBoard.objectExist.bind(gameBoard))
   );
 
-  const ghosts = [
-    new Ghost(5, 188, randomMovement, OBJECT_TYPE.BLINKY),
-    new Ghost(4, 209, randomMovement, OBJECT_TYPE.PINKY),
-    new Ghost(3, 230, randomMovement, OBJECT_TYPE.INKY),
-    new Ghost(2, 251, randomMovement, OBJECT_TYPE.CLYDE)
+
+  let ghosts = [
+    new Ghost(5, 207, randomMovement, OBJECT_TYPE.BLINKY),
+    new Ghost(4, 228, randomMovement, OBJECT_TYPE.PINKY),
+    new Ghost(3, 249, randomMovement, OBJECT_TYPE.INKY),
+    new Ghost(5, 208, randomMovement, OBJECT_TYPE.BLINKY),
+    new Ghost(4, 227, randomMovement, OBJECT_TYPE.PINKY),
+    new Ghost(3, 247, randomMovement, OBJECT_TYPE.INKY),
+    new Ghost(5, 248, randomMovement, OBJECT_TYPE.BLINKY),
+    new Ghost(4, 229, randomMovement, OBJECT_TYPE.PINKY),
+    new Ghost(3, 209, randomMovement, OBJECT_TYPE.INKY)
   ];
 
+  ghosts.length = difficultyLevel * 3;
   // Gameloop
-  timer = setInterval(() => gameLoop(pacman, ghosts), GLOBAL_SPEED);
+  timer = setInterval(() => gameLoop(pacman, ghosts), GLOBAL_SPEED / difficultyLevel);
 }
 
 // Initialize game
-startButton.addEventListener('click', startGame);
+levelSelect.addEventListener('change', (e) => {
+  if (e.target.value)
+    startGame(e.target.value);
+})
