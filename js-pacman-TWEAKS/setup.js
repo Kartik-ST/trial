@@ -78,3 +78,9 @@ export const LEVEL = [
   1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1,
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 ];
+
+export const DIFFICULTY_LEVEL = {
+  LEVEL_ONE: "1",
+  LEVEL_TWO: "2",
+  LEVEL_THREE: "3"
+};
