@@ -3,7 +3,7 @@
 }
 
 body {
-  background: url('background.jpg') no-repeat center center fixed;
+  background: url('./images/garbage-pacman-landing-background.png') no-repeat center fixed;
   background-size: cover;
 }
 
@@ -13,6 +13,18 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#landing-page {
+  font-size: xxx-large;
+  background: black;
+  color: white;
+}
+
+#game-page {
+  /* display: none; */
+  /* background: url('background.jpg') no-repeat center center fixed; */
+  /* background-size: cover; */
 }
 
 #game {
@@ -61,6 +73,18 @@ body {
 
 .hide {
   display: none;
+}
+
+.hide2 {
+  visibility: hidden;
+}
+
+.show {
+  display: initial;
+}
+
+.show2 {
+  visibility: visible;
 }
 
 .square {
@@ -130,7 +154,7 @@ body {
 }
 
 .pinky {
-  background: url(./images/vehicle-lorry.png) no-repeat;
+  background: url(./images/vehicle-taxi.png) no-repeat;
 }
 
 .inky {
@@ -143,7 +167,7 @@ body {
 
 .pacman {
   background: url(./images/pacman.png) no-repeat;
- /* border: none;images
+  /* border: none;images
    border-radius: 50%;
   clip-path: polygon(
     0 0,
