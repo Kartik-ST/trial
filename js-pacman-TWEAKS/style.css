@@ -24,18 +24,19 @@ body {
   font-size: xxx-large;
   color: white;
 }
+
 #landing-page li{
   position: relative;
 }
+
 #level-one-selector, #level-two-selector, #level-three-selector{
   position: absolute;
   left: -56px;
   top: 23px;
 }
+
 #game-page {
-  /* display: none; */
-  /* background: url('background.jpg') no-repeat center center fixed; */
-  /* background-size: cover; */
+
 }
 
 #game {
@@ -102,14 +103,6 @@ body {
   display: block;
 }
 
-/* .blank {
-  background: black;
-} */
-
-/* .wall {
-  border: 1px solid blue;
-} */
-
 .dot {
   background: url(./images/garbage-bin-dot.png) no-repeat;
   background-position: 8px 6px;
@@ -129,32 +122,6 @@ body {
   border-radius: 10px 10px 2px 2px;
   border: none;
 }
-
-/* .ghost::before {
-  content: '';
-  display: block;
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: black;
-  border-radius: 50%;
-  left: 3px;
-  top: 5px;
-  border: 2px solid white;
-}
-
-.ghost::after {
-  content: '';
-  display: block;
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: black;
-  border-radius: 50%;
-  right: 3px;
-  top: 5px;
-  border: 2px solid white;
-} */
 
 .scared {
   background: blue !important;
@@ -178,33 +145,7 @@ body {
 
 .pacman {
   background: url(./images/pacman.png) no-repeat;
-  /* border: none;images
-   border-radius: 50%;
-  clip-path: polygon(
-    0 0,
-    20px 0,
-    20px -5px,
-    8px 10px,
-    20px 25px,
-    20px 20px,
-    0 20px
-  );
-  animation: chew 0.2s linear forwards infinite; */
 }
-
-/* @keyframes chew {
-  50% {
-    clip-path: polygon(
-      0 0,
-      20px 0,
-      20px 10px,
-      8px 10px,
-      20px 10px,
-      20px 20px,
-      0 20px
-    );
-  }
-} */
 
 .game-timer {
   top: 0;

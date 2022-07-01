@@ -116,6 +116,8 @@ function gameOver(pacman, grid) {
   gameBoard.showGameStatus(gameWin);
 
   clearInterval(timer);
+
+  setTimeout(() => location.reload(), 5000);
 }
 
 function checkCollision(pacman, ghosts) {
@@ -198,7 +200,6 @@ function gameLoop(pacman, ghosts) {
   timerDisplay.innerHTML = `${Math.floor(gameTime / 60).toString().padStart(2, '0')}: ${(gameTime % 60).toString().padStart(2, '0')}`;
 
   //11. check if garbageman is completely blocked
-  // if(pacman)
   if (gameBoard.isPacmanCompletelyBlocked(pacman))
     gameOver(pacman, gameGrid);
 }
