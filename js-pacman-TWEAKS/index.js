@@ -18,8 +18,6 @@ const levelThreePointer = document.querySelector('#level-three-selector');
 const gamePage = document.querySelector('#game-page');
 const gameGrid = document.querySelector('#game');
 const scoreTable = document.querySelector('#score');
-const startButton = document.querySelector('#start-button');
-const levelSelect = document.querySelector('#level-select');
 const timerDisplay = document.querySelector('#game-timer');
 
 // Game constants
@@ -49,19 +47,16 @@ function landing() {
   levelTwoPointer.classList.add('hide');
   levelThreePointer.classList.add('hide');
 
-  document.addEventListener('keydown', (e) =>
-    handleKeyInput(e)
-  );
+  document.addEventListener('keydown', e => handleKeyInput(e));
 }
 
-function handleKeyInput(e) {
+const handleKeyInput = (e) => {
 
   if (e.keyCode === 38) {
     levelSelected--
   } else if (e.keyCode === 40) {
     levelSelected++
   } else if (e.keyCode === 13) {
-    console.log(1234)
     // document.removeEventListener('keydown', (e) =>
     //   handleKeyInput(e)
     // );
@@ -121,8 +116,6 @@ function gameOver(pacman, grid) {
   gameBoard.showGameStatus(gameWin);
 
   clearInterval(timer);
-  // Show startbutton
-  startButton.classList.remove('hide');
 }
 
 function checkCollision(pacman, ghosts) {
@@ -203,9 +196,16 @@ function gameLoop(pacman, ghosts) {
 
   //10. Display time elapsed
   timerDisplay.innerHTML = `${Math.floor(gameTime / 60).toString().padStart(2, '0')}: ${(gameTime % 60).toString().padStart(2, '0')}`;
+
+  //11. check if garbageman is completely blocked
+  // if(pacman)
+  if (gameBoard.isPacmanCompletelyBlocked(pacman))
+    gameOver(pacman, gameGrid);
 }
 
 function startGame(difficultyLevel) {
+
+  document.removeEventListener('keydown', e => handleKeyInput(e));
 
   gameTimer = setInterval(() => gameTime++, 1000);
   playAudio(soundGameStart);
